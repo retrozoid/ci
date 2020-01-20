@@ -28,11 +28,21 @@ type TriggeredBy struct {
 type TestOccurrences struct {
 }
 
+// RunningInfo ...
+type RunningInfo struct {
+	PercentageComplete    int64  `json:"percentageComplete"`
+	ElapsedSeconds        int64  `json:"elapsedSeconds"`
+	EstimatedTotalSeconds int64  `json:"estimatedTotalSeconds"`
+	CurrentStageText      string `json:"currentStageText"`
+	Outdated              bool   `json:"outdated"`
+	ProbablyHanging       bool   `json:"probablyHanging"`
+}
+
 // Build ...
 type Build struct {
 	StatusText          string           `json:"statusText"`
 	StartEstimate       string           `json:"startEstimate"`
-	QueuedDate          string           `json:"running-info"`
+	QueuedDate          *RunningInfo     `json:"running-info"`
 	StartDate           string           `json:"startDate"`
 	FinishDate          string           `json:"finishDate"`
 	Triggered           *TriggeredBy     `json:"triggered"`
