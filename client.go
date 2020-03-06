@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"time"
 )
@@ -117,8 +116,6 @@ func (c *Client) request(method, path string, body interface{}, response interfa
 	res := new(bytes.Buffer)
 	res.ReadFrom(r.Body)
 	defer r.Body.Close()
-
-	log.Print(res.String())
 
 	if r.StatusCode != http.StatusOK {
 		return errors.New(res.String())
