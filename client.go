@@ -48,7 +48,6 @@ func (c *Client) req(method, path string, reader io.Reader) (*http.Response, err
 	}
 
 	for retry := c.Setting.RetryMax; retry > 0; retry-- {
-		log.Print(c.url + path)
 		if request, err = http.NewRequest(method, c.url+path, bytes.NewReader(body)); err != nil {
 			return nil, err
 		}
@@ -59,7 +58,6 @@ func (c *Client) req(method, path string, reader io.Reader) (*http.Response, err
 		if err == nil {
 			return response, nil
 		}
-		log.Print(err)
 		time.Sleep(c.Setting.RetryInterval)
 	}
 
